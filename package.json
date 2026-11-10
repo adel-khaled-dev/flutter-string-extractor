@@ -1,0 +1,102 @@
+{
+  "name": "flutter-string-extractor",
+  "displayName": "Flutter String Extractor",
+  "description": "Extract hardcoded strings to AppStrings with one click - AR + EN + Variables",
+  "version": "2.1.0",
+  "publisher": "adelkhaled",
+  "license": "MIT",
+  "icon": "icon.png",
+  "homepage": "https://github.com/adel-khaled-dev/flutter-string-extractor",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/adel-khaled-dev/flutter-string-extractor"
+  },
+  "galleryBanner": {
+    "color": "#1E1E1E",
+    "theme": "dark"
+  },
+  "engines": {
+    "vscode": "^1.85.0"
+  },
+  "categories": [
+    "Other",
+    "Snippets"
+  ],
+  "keywords": [
+    "flutter",
+    "dart",
+    "localization",
+    "arabic",
+    "strings",
+    "extract"
+  ],
+  "activationEvents": [
+    "onLanguage:dart"
+  ],
+  "main": "./out/extension.js",
+  "scripts": {
+    "vscode:prepublish": "npm run compile",
+    "compile": "tsc -p ./",
+    "watch": "tsc -watch -p ./",
+    "package": "vsce package"
+  },
+  "devDependencies": {
+    "@types/node": "^20.19.43",
+    "@types/vscode": "^1.85.0",
+    "@vscode/vsce": "^2.26.0",
+    "typescript": "^5.3.0"
+  },
+  "contributes": {
+    "configuration": {
+      "title": "Flutter String Extractor",
+      "properties": {
+        "flutterStringExtractor.className": {
+          "type": "string",
+          "default": "AppStrings",
+          "description": "Name of strings class"
+        },
+        "flutterStringExtractor.filePath": {
+          "type": "string",
+          "default": "lib/core/constants/app_strings.dart",
+          "description": "Where to save strings file"
+        },
+        "flutterStringExtractor.enableTranslation": {
+          "type": "boolean",
+          "default": true,
+          "description": "Ask for English translation"
+        }
+      }
+    },
+    "commands": [
+      {
+        "command": "extension.extractOne",
+        "title": "Extract to AppStrings (AR + EN)"
+      },
+      {
+        "command": "extension.extractAllInFile",
+        "title": "Extract All Strings in File to AppStrings"
+      }
+    ],
+    "menus": {
+      "editor/context": [
+        {
+          "when": "editorHasSelection && editorLangId == dart",
+          "command": "extension.extractOne",
+          "group": "navigation"
+        },
+        {
+          "when": "editorLangId == dart",
+          "command": "extension.extractAllInFile",
+          "group": "navigation"
+        }
+      ]
+    },
+    "keybindings": [
+      {
+        "command": "extension.extractOne",
+        "key": "ctrl+alt+s",
+        "when": "editorTextFocus && editorLangId == dart"
+      }
+    ]
+  }
+}
